@@ -21,6 +21,18 @@ RUN groupadd -r $ERR_USER \
        -s /bin/bash \
        $ERR_USER
 # Install packages and perform cleanup
+
+RUN apt-get update && \
+    apt-get -y install wget && \
+    apt-get -y install gcc && \
+    apt-get -y install make && \
+    wget https://www.python.org/ftp/python/3.9.6/Python-3.9.6.tgz && \
+    tar xzf Python-3.9.6.tgz && \
+    cd Python-3.9.6 && \
+    ./configure --enable-optimizations && \
+    make && \
+    make install
+
 RUN apt-get update \
   && apt-get -y install --no-install-recommends \
          git \
